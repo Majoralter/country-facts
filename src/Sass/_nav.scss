@@ -1,0 +1,18 @@
+nav{
+    @include flex(row, center, space-between, 0);
+    padding: var(--size-fluid-2) var(--size-fluid-4);
+    box-shadow: 0 0 1em var(--gray-4);
+
+    .nav__link{
+        font-size: var(--font-size-3);
+        font-weight: bold;
+    }
+
+    .nav__button{
+        all: unset;
+        @include flex(row, center, center, .1em);
+        font-size: var(--font-size-1);
+        font-weight: 700;
+        cursor: pointer;
+    }
+}

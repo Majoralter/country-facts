@@ -1,0 +1,46 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:opsz,wght@6..12,300;6..12,500;6..12,700&display=swap');
+@import "https://unpkg.com/open-props";
+
+*,*::before,*::after{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style: none;
+    font-family: 'Nunito Sans', sans-serif;
+}
+
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24
+}
+
+// colors
+$Dark-Blue: hsl(209, 23%, 22%);
+$Very-Dark-Blue-Bg: hsl(207, 26%, 17%);
+$Very-Dark-Blue: hsl(200, 15%, 8%);
+$Dark-Gray: hsl(0, 0%, 52%);
+$Very-Light-Gray: hsl(0, 0%, 98%);
+$White : hsl(0, 0%, 100%);
+
+#dark{
+    background-color: $Dark-Blue;
+    color: $White;
+    box-shadow: 0 0 1em $Dark-Blue;
+}
+
+#light{
+    background-color: $White;
+    color: $Very-Dark-Blue;
+}
+
+@mixin flex($flex-direction, $align-items, $justify-content, $gap){
+    display: flex;
+    flex-direction: $flex-direction;
+    align-items: $align-items;
+    justify-content: $justify-content;
+    gap: $gap;
+}
