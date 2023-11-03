@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useOutletContext, Link } from "react-router-dom";
+import { useOutletContext, Link, useNavigate } from "react-router-dom";
 import Loader from "../Loader";
 const Home = () => {
   const [theme] = useOutletContext();
@@ -10,17 +10,24 @@ const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [countries, setCountries] = useState([]);
 
+  const navigate = useNavigate();
+
   const fetchCountries = async () => {
     setIsLoading(true);
     const response = await fetch("https://restcountries.com/v3.1/all"),
       data = await response.json();
 
-    data.length = 48;
+    data.length = 100;
 
     setIsLoading(false);
     setCountries([...data]);
-    // console.log(data);
+    console.log(data);
   };
+
+  const handleSearch = (e) =>{
+    e.preventDefault()
+    navigate(`/countries/${countryName}`)
+  }
 
   useEffect(() => {
     fetchCountries();
@@ -28,10 +35,15 @@ const Home = () => {
 
   const country = countries.map((item, index) => {
     return (
-      <div key={index} className="country" id={theme}>
+      <Link
+        to={`/countries/${item.name.common}`}
+        key={index}
+        className="country"
+        id={theme}
+      >
         <img src={item.flags.svg} alt={`The flag of ${item.name.official}`} />
 
-        <Link to={`/countries/${item.name.official}`} className="country__details">
+        <div className="country__details">
           <h1>{item.name.official}</h1>
           <p>
             Population: <span>{item.population}</span>
@@ -42,14 +54,14 @@ const Home = () => {
           <p>
             Capital: <span>{item.capital}</span>
           </p>
-        </Link>
-      </div>
+        </div>
+      </Link>
     );
   });
 
   return (
     <main style={{ backgroundColor: theme === "dark" && "hsl(207, 26%, 17%)" }}>
-      <form className="main__form">
+      <form className="main__form" onSubmit={handleSearch}>
         <input
           id={theme}
           placeholder="Search for a country..."
