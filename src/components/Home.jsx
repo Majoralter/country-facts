@@ -89,13 +89,18 @@ const Home = () => {
   return (
     <main style={{ backgroundColor: theme === "dark" && "hsl(207, 26%, 17%)" }}>
       <form className="main__form" onSubmit={handleSearch}>
-        <input
-          id={theme}
-          placeholder="Search for a country..."
-          type="text"
-          value={countryName}
-          onChange={(e) => setCountryName(e.target.value)}
-        />
+        <label htmlFor="searchInput">
+          <input
+            name="searchInput"
+            id={theme}
+            placeholder="Search for a country..."
+            type="text"
+            value={countryName}
+            onChange={(e) => setCountryName(e.target.value)}
+          />
+
+          <button type="submit" id={theme}>Search</button>
+        </label>
 
         <select
           id={theme}
