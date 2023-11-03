@@ -6,7 +6,6 @@ const Home = () => {
   const [theme] = useOutletContext();
 
   const [countryName, setCountryName] = useState("");
-  const [region, setRegion] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const [countries, setCountries] = useState([]);
 
@@ -21,16 +20,44 @@ const Home = () => {
 
     setIsLoading(false);
     setCountries([...data]);
-    console.log(data);
   };
 
-  const handleSearch = (e) =>{
-    e.preventDefault()
-    navigate(`/countries/${countryName}`)
-  }
+  const fetchRegion = async (e) => {
+    let region = e.target.value
+
+    if(region === "") return
+
+    if (region === "All") {
+      fetchCountries();
+      return;
+    } else {
+      setIsLoading(true);
+
+      const response = await fetch(
+        `https://restcountries.com/v3.1/region/${region}`
+      );
+
+      const data = await response.json();
+
+      setCountries([...data]);
+
+      setIsLoading(false);
+    }
+  };
+
+  const handleSearch = (e) => {
+    e.preventDefault();
+    navigate(`/countries/${countryName}`);
+  };
 
   useEffect(() => {
-    fetchCountries();
+    try {
+      fetchCountries();
+    } catch (err) {
+      console.log(err.message);
+    }
+
+    return () => {};
   }, []);
 
   const country = countries.map((item, index) => {
@@ -72,10 +99,11 @@ const Home = () => {
 
         <select
           id={theme}
-          name="region-filter"
-          value={region}
-          onChange={(e) => setRegion(e.target.value)}
+          name="region"
+          onChange={fetchRegion}
         >
+          <option value="">Filter by Region</option>
+          <option value="All">All</option>
           <option value="Africa">Africa</option>
           <option value="America">America</option>
           <option value="Europe">Europe</option>

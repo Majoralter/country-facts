@@ -15,12 +15,16 @@ const Country = () => {
 
     setIsLoading(false);
     setCountryData([...data]);
-
-    console.log(data);
   };
 
   useEffect(() => {
-    fetchCountry();
+    try{
+        fetchCountry();
+    } catch(err){
+        console.log(err.message)
+    }
+
+    return () => {}
   }, []);
 
   const country = countryData.map((item, index) => {
