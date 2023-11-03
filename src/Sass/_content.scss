@@ -110,6 +110,15 @@ main {
   }
 }
 
+.error__wrapper{
+  @include flex(column, center, center, 1rem);
+  min-height: 90dvh;
+
+  h1{
+    font-size: var(--font-size-fluid-3);
+  }
+}
+
 @media (max-width: 796px) {
   main {
     .main__form {
