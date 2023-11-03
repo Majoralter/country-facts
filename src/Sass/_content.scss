@@ -1,4 +1,5 @@
 main {
+  @include flex(column, center, center, 0);
   padding: var(--size-fluid-2) var(--size-fluid-4);
   min-height: 100dvh;
 

@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { useState } from "react";
 import { useOutletContext } from "react-router-dom";
+import Loader from "../Loader";
 const Home = () => {
   const [theme] = useOutletContext();
 
@@ -71,7 +72,7 @@ const Home = () => {
         </select>
       </form>
 
-      {isLoading ? <p>Loading</p> : <div className="countries">{country}</div>}
+      {isLoading ? <Loader /> : <div className="countries">{country}</div>}
     </main>
   );
 };
