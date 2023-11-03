@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import { useOutletContext, Link } from "react-router-dom";
 import Loader from "../Loader";
 const Home = () => {
   const [theme] = useOutletContext();
@@ -31,7 +31,7 @@ const Home = () => {
       <div key={index} className="country" id={theme}>
         <img src={item.flags.svg} alt={`The flag of ${item.name.official}`} />
 
-        <div className="country__details">
+        <Link to={`/countries/${item.name.official}`} className="country__details">
           <h1>{item.name.official}</h1>
           <p>
             Population: <span>{item.population}</span>
@@ -42,7 +42,7 @@ const Home = () => {
           <p>
             Capital: <span>{item.capital}</span>
           </p>
-        </div>
+        </Link>
       </div>
     );
   });
